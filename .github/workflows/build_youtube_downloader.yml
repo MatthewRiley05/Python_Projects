@@ -22,4 +22,4 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build exe
-        run: pyinstaller --onefile Youtube_Downloader.py
+        run: pyinstaller --onefile Youtube_Downloader/Youtube_Downloader.py

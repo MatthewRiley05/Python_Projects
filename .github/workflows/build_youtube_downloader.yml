@@ -1,0 +1,28 @@
+name: Build Exe
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: pip install pyinstaller
+
+      - name: Build exe
+        run: pyinstaller --onefile your_script.py
+```
+
+Customize the workflow to suit your needs. You may need to modify the `on` section to trigger the workflow on different events or branches. Adjust the Python version, dependencies, and build commands as required.

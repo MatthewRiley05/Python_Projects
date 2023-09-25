@@ -23,6 +23,3 @@ jobs:
 
       - name: Build exe
         run: pyinstaller --onefile your_script.py
-```
-
-Customize the workflow to suit your needs. You may need to modify the `on` section to trigger the workflow on different events or branches. Adjust the Python version, dependencies, and build commands as required.

@@ -23,3 +23,6 @@ jobs:
 
       - name: Build exe
         run: pyinstaller --onefile Youtube_Downloader/Youtube_Downloader.py
+
+      - name: Verify output directory
+        run: ls -R

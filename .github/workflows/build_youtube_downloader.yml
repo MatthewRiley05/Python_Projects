@@ -21,9 +21,11 @@ jobs:
       - name: Install dependencies
         run: pip install pyinstaller
 
+      - name: Create dist directory
+        run: mkdir dist
+
       - name: Copy resource files
         run: |
-          mkdir dist
           cp Youtube_Downloader/settings.png dist/settings.png
           cp Youtube_Downloader/save_path.txt dist/save_path.txt
 

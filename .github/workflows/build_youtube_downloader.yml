@@ -1,44 +1,26 @@
-name: Build Youtube_Downloader.exe
+
+name: Package Application with Pyinstaller
 
 on:
   push:
-    branches: 
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
+
     runs-on: windows-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v3 
-        with:
-          python-version: 3.8
-          
-      - name: Verify files checked out
-        run: |
-          ls
-          ls Youtube_Downloader
+    - name: Youtube_Downloader
+      uses: JackMcKew/pyinstaller-action-windows@main
+      with:
+        path: Youtube_Downloader/Youtube-Downloader.py
 
-      - name: Install dependencies 
-        run: pip install pyinstaller
-
-      - name: Create dist directory
-        run: mkdir dist
-
-      - name: Copy resource files
-        run: |
-          cp Youtube_Downloader/settings.png dist/settings.png
-          cp Youtube_Downloader/save_path.txt dist/save_path.txt
-
-      - name: Build exe
-        run: pyinstaller --onefile --distpath dist --add-data "dist/settings.png;." --add-data "dist/save_path.txt;." Youtube_Downloader/Youtube_Downloader.py
-
-      - name: Verify dist folder created
-        run: ls dist
-
-      - name: Print pyinstaller output
-        run: pyinstaller --onefile --distpath dist --add-data "dist/settings.png;." --add-data "dist/save_path.txt;." Youtube_Downloader/Youtube_Downloader.py
+    - uses: actions/upload-artifact@v3
+      with:
+        name: name-of-artifact
+        path: src/dist/windows

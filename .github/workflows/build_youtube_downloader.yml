@@ -21,8 +21,11 @@ jobs:
       - name: Install dependencies
         run: pip install pyinstaller
 
-      - name: Build exe
-        run: pyinstaller --onefile Youtube_Downloader/Youtube_Downloader.py
+      - name: Copy resource files
+        run: |
+          mkdir resources
+          cp path/to/image.png resources/image.png
+          cp path/to/file.txt resources/file.txt
 
-      - name: Verify output directory
-        run: ls -R
+      - name: Build exe
+        run: pyinstaller --onefile --add-data "resources/image.png;resources" --add-data "resources/file.txt;resources" Youtube_Downloader/Youtube_Downloader.py

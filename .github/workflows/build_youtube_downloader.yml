@@ -2,7 +2,7 @@ name: Build Youtube_Downloader.exe
 
 on:
   push:
-    branches:
+    branches: 
       - main
 
 jobs:
@@ -14,11 +14,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v3 
         with:
           python-version: 3.8
+          
+      - name: Verify files checked out
+        run: |
+          ls
+          ls Youtube_Downloader
 
-      - name: Install dependencies
+      - name: Install dependencies 
         run: pip install pyinstaller
 
       - name: Create dist directory
@@ -30,4 +35,10 @@ jobs:
           cp Youtube_Downloader/save_path.txt dist/save_path.txt
 
       - name: Build exe
+        run: pyinstaller --onefile --distpath dist --add-data "dist/settings.png;." --add-data "dist/save_path.txt;." Youtube_Downloader/Youtube_Downloader.py
+
+      - name: Verify dist folder created
+        run: ls dist
+
+      - name: Print pyinstaller output
         run: pyinstaller --onefile --distpath dist --add-data "dist/settings.png;." --add-data "dist/save_path.txt;." Youtube_Downloader/Youtube_Downloader.py

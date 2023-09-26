@@ -28,4 +28,6 @@ jobs:
           cp Youtube_Downloader/save_path.txt resources/save_path.txt
 
       - name: Build exe
-        run: pyinstaller --onefile --distpath dist --add-data "resources/settings.png;resources" --add-data "resources/save_path.txt;resources" Youtube_Downloader/Youtube_Downloader.py
+        run: |
+          mkdir dist
+          pyinstaller --onefile --distpath dist --add-data "resources/settings.png;resources" --add-data "resources/save_path.txt;resources" Youtube_Downloader/Youtube_Downloader.py

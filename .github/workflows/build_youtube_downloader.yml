@@ -23,9 +23,9 @@ jobs:
 
       - name: Copy resource files
         run: |
-          mkdir resources
-          cp Youtube_Downloader/settings.png resources/settings.png
-          cp Youtube_Downloader/save_path.txt resources/save_path.txt
+          mkdir dist
+          cp Youtube_Downloader/settings.png dist/settings.png
+          cp Youtube_Downloader/save_path.txt dist/save_path.txt
 
       - name: Build exe
-        run: pyinstaller --onefile --specpath dist --distpath dist --add-data "resources/settings.png;resources" --add-data "resources/save_path.txt;resources" Youtube_Downloader/Youtube_Downloader.py
+        run: pyinstaller --onefile --distpath dist --add-data "dist/settings.png;." --add-data "dist/save_path.txt;." Youtube_Downloader/Youtube_Downloader.py

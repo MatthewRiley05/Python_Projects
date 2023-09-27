@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v3
@@ -23,13 +25,13 @@ jobs:
 
     - name: Package Application
       run: |
-        mkdir dist
+        mkdir -p dist
         pyinstaller --onefile --noconsole Youtube_Downloader/Youtube_Downloader.py
         cp Youtube_Downloader/settings.png dist/
         cp Youtube_Downloader/save_path.txt dist/
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2
       with:
         name: windows
         path: dist/

@@ -1,7 +1,4 @@
-
-            
-
-name: Package Application with Pyinstaller
+name: Package Youtube_Downloader.py with PyInstaller
 
 on:
   push:
@@ -11,19 +8,28 @@ on:
 
 jobs:
   build:
-
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: PyInstaller Windows
-      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
-            
+    - name: Set up Python
+      uses: actions/setup-python@v2
       with:
-        path: Youtube_Downloader/Youtube-Downloader.py
+        python-version: 3.8
 
-    - uses: actions/upload-artifact@v3
+    - name: Install dependencies
+      run: pip install pyinstaller
+
+    - name: Package Application
+      run: |
+        mkdir dist
+        pyinstaller --onefile --noconsole Youtube_Downloader/Youtube_Downloader.py
+        cp Youtube_Downloader/settings.png dist/
+        cp Youtube_Downloader/save_path.txt dist/
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
       with:
-        name: name-of-artifact
-        path: src/dist/windows
+        name: exe-artifact
+        path: dist/

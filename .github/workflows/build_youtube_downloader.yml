@@ -2,41 +2,41 @@ name: Package Youtube_Downloader.py with PyInstaller
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        persist-credentials: false
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-    - name: Install dependencies
-      run: pip install pyinstaller
+      - name: Install dependencies
+        run: pip install pyinstaller
 
-    - name: Verify dist folder
-      run: |
-       ls -la
-       ls -la dist
+      - name: Verify dist folder
+        run: |
+          ls -la
+          ls -la dist
 
-       - name: Package Application
-       run: |
-        mkdir -p dist
-        pyinstaller --onefile --noconsole Youtube_Downloader/Youtube_Downloader.py
-        cp Youtube_Downloader/settings.png dist/
-        cp Youtube_Downloader/save_path.txt dist/
+      - name: Package Application
+        run: |
+          mkdir -p dist
+          pyinstaller --onefile --noconsole Youtube_Downloader/Youtube_Downloader.py
+          cp Youtube_Downloader/settings.png dist/
+          cp Youtube_Downloader/save_path.txt dist/
 
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v2
-          with:
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
           name: windows
           path: dist/

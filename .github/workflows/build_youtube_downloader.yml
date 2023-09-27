@@ -1,4 +1,6 @@
 
+            
+
 name: Package Application with Pyinstaller
 
 on:
@@ -15,8 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Youtube_Downloader
-      uses: JackMcKew/pyinstaller-action-windows@main
+    - name: PyInstaller Windows
+      uses: JackMcKew/pyinstaller-action-windows@v0.1.2
+            
       with:
         path: Youtube_Downloader/Youtube-Downloader.py
 

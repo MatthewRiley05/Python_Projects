@@ -23,15 +23,20 @@ jobs:
     - name: Install dependencies
       run: pip install pyinstaller
 
-    - name: Package Application
+    - name: Verify dist folder
       run: |
+       ls -la
+       ls -la dist
+
+       - name: Package Application
+       run: |
         mkdir -p dist
         pyinstaller --onefile --noconsole Youtube_Downloader/Youtube_Downloader.py
         cp Youtube_Downloader/settings.png dist/
         cp Youtube_Downloader/save_path.txt dist/
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: windows
-        path: dist/
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v2
+          with:
+          name: windows
+          path: dist/
